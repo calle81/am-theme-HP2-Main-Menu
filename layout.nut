@@ -1997,7 +1997,7 @@ local mfliter2H = floor( bbh * 0.15 )
  ::OBJECTS <- {
 mbg = fe.add_image( "backgrounds/Logos/Mid Blue.png", 0, 0, fe.layout.width, fe.layout.height ),
 msystem = fe.add_image( "../../menu-art/flyer/[DisplayName]", flw*0.3, flh*0.5, flw*0.4, flh*0.4 ),
-mwhiteline = fe.add_image( "Mid Blue.png", 0, flh*0.3, fe.layout.width, flh*0.15 ),
+mwhiteline = fe.add_image( "white.png", 0, flh*0.3, fe.layout.width, flh*0.15 ),
 mfliter = fe.add_text( "Main Menu", 0, flh*0.3, fe.layout.width, flh*0.1 ),
 mfliter2 = fe.add_text( "Default Layout", 0, flh*0.4, fe.layout.width, mfliter2H ),
 }
