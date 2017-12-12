@@ -9,9 +9,10 @@
 
 class UserConfig {
 	</ label="HYPERPIE2 MAIN MENU OPTIONS", help="Brought to you by Project HyperPie", order=1 /> uct1=" ";
-	</ label=" ", help="Brought to you by Project HyperPie", order=2 /> uct2=" ";
+	</ label="Warning! Dont change these options", help="Changing these options might break the oher views. Instead assign a button to Toggle Layout in the control options for predefined views", order=2 /> uct2="";
+	</ label=" ", help="Brought to you by Project HyperPie", order=2 /> uct3=" ";
 
-	</ label="GENERAL SETTINGS", help="Brought to you by Project HyperPie", order=3 /> uct3=" ";
+	</ label="GENERAL SETTINGS", help="Brought to you by Project HyperPie", order=3 /> uct4=" ";
 	</ label="Background Image", help="Select theme background", options="Flyer, City Lights, Pixel Skyline, Grid Logos Dark Blue, Grid Logos Dark Grey, Grid Logos Green, Grid Logos Light Blue, Grid Logos Light Grey, Grid Logos Mid Blue, Grid Logos Mid Blue, Grid Logos Orange, Grid Logos Pink, Grid Logos Purple, Grid Logos Red, Grid Logos Turquoise, Grid Logos Yellow, Logos Dark Blue, Logos Dark Grey, Logos Green, Logos Light Blue, Logos Light Grey, Logos Light Turquoise, Logos Mid Blue, Logos Orange, Logos Pink, Logos Purple, Logos Red, Logos Turquoise, Logos Yellow, Mono Logos Blue, Mono Logos Black, Neon, None", order=4 /> enable_bg="Logos Mid Blue";     
 	</ label="Border Overlay", help="Enable Border Overlay", options="Yes,No", order=5 /> enable_border="Yes"; 
 	</ label="Background Image Scanline Overlay", help="Enable Background Image Scanline Overlay", options="Light, Medium, Dark, Diagonal, No", order=6 /> enable_backgroundoverlay="Light";
@@ -20,28 +21,28 @@ class UserConfig {
 	</ label="Enable Flyer Art", help="Enable Flyer Art", options="Yes,No", order=8 /> enable_bigart3="Yes";
    	</ label="Clock", help="Enable Clock", options="Yes,No", order=8 /> enable_clock="Yes";
 	</ label="Left Wheel Image", help="Fade Out Left Wheel Image", options="Yes, Fade Out,No", order=8 /> LeftWheel="Yes" ;
-	</ label=" ", help="Brought to you by Project HyperPie", order=9 /> uct4=" ";
+	</ label=" ", help="Brought to you by Project HyperPie", order=9 /> uct5=" ";
 	
-	</ label="WHEEL OPTIONS", help="Brought to you by Project HyperPie", order=10 /> uct5=" ";  
+	</ label="WHEEL OPTIONS", help="Brought to you by Project HyperPie", order=10 /> uct6=" ";  
 	</ label="Wheel Layout", help="Select wheel type", options="List Box,Horizontal,Horizontal Animated,Vertical Wheel", order=11 /> enable_list_type="List Box";
 	</ label="Wheel Art Folder", help="The artwork to spin", options="wheel, marquee, flyer, fanart, cartart, boxart", order=12 /> orbit_art="wheel";
 	</ label="Wheel Transition Time", help="Time in milliseconds for wheel spin.", order=13 /> transition_ms="35";  
 	</ label="Wheel Fade Time", help="Time in milliseconds to fade the wheel.", options="Off,2500,5000,7500,10000,12500,15000,17500,20000,22500,25000,27500,30000", order=14 /> wheel_fade_ms="2500";
    	</ label="Game List Rows", help="How many games to display on the List Box", options="11,13,15,17,19,21,23,25,27,29,31", order=15 /> rows="19"
 	</ label="Game List Auto Hide", help="Time in seconds after which game list hides\n0 disables auto hide and flyer. Default value is 1", option="0", order=16 /> glautohide="3";
+	</ label=" ", help="Brought to you by Project HyperPie", order=9 /> uct7=" ";
 
-
-	</ label="HARDWARE INFO OPTIONS", help="Show system information in layout", order=18 /> uct7=" ";
+	</ label="HARDWARE INFO OPTIONS", help="Show system information in layout", order=18 /> uct8=" ";
 	</ label="System Info", help="Show System Info - CPU, RAM etc.", options="Yes,No", order=19 /> showSysInfo="Yes";
 	</ label=" ", help="Brought to you by Project HyperPie", order=20 /> uct8=" ";
    	
-	</ label="GAME/SYSTEM INFO", help="Show or hide system name", order=24 /> uct12=" ";
+	</ label="GAME/SYSTEM INFO", help="Show or hide system name", order=24 /> uct9=" ";
     </ label="Title", help="Enable Title", options="Yes, No", order=25 /> enable_title="Yes";  
 	</ label="Fade Title", help="Fade out title", options="Yes, No", order=26 /> fadeWheelTitle="No";
     </ label="Game Description", help="Select Game Description Text Mode", options="Right,Popup,Off", order=27 /> select_description="Off";
-	</ label=" ", help="Brought to you by Project HyperPie", order=28 /> uct13=" ";
+	</ label=" ", help="Brought to you by Project HyperPie", order=28 /> uct10=" ";
 
-	</ label="COLOUR OPTIONS", help="Brought to you by Project HyperPie", order=29 /> uct14=" ";		  
+	</ label="COLOUR OPTIONS", help="Brought to you by Project HyperPie", order=29 /> uct11=" ";		  
 	</ label="Border Overlay Colour as R,G,B", help="( 0-255 values allowed )\nSets the colour of background elements.\nLeave blank if you want the colour from the randomized to be stored permanently.", option="0", order=30 /> bgrgb="0,0,0";
 	</ label="List Box Background Color as R,G,B", help="( 0-255 values allowed )\nSets the colour of background elements.\nLeave blank if you want the colour from the randomized to be stored permanently.", option="0", order=31 /> lbgrgb="0,0,50";
 	</ label="Video Frame Color as R,G,B", help="( 0-255 values allowed )\nSets the colour of the frame.\nLeave blank if you want the colour from the randomized to be stored permanently.", option="0", order=32 /> frrgb="250,250,250";
@@ -1898,10 +1899,13 @@ function on_transition( ttype, var, ttime ) {
 		
 		update_artwork = true	
 		update_counter = 0
-					gameListBoxAnimX.from = flw + flx - crw
+
+		if ( my_config["enable_list_type"] == "List Box" ){
+			gameListBoxAnimX.from = flw + flx - crw
 			gameListBoxAnimX.to = flw + flx - crw - lbw
 			gameListBoxBackgroundAnimX.from = flw + flx - crw
 			gameListBoxBackgroundAnimX.to = flw + flx - crw - lbw
+		}
 			categoryAnimX.from = categoryX + category.msg_width * 0.5 + categoryLeft.msg_width * 0.5 + categoryGap
 			categoryAnimX.to = categoryX
 			categoryRightAnimA.from = 0
@@ -1921,10 +1925,12 @@ function on_transition( ttype, var, ttime ) {
 		if ( glist_delay != 0 ) gameListBoxBackgroundAnimA.hide( 0, fe.layout.time )
 		
 		if ( var < 0 ) {
+			if ( my_config["enable_list_type"] == "List Box" ){
 			gameListBoxAnimX.from = flw + flx - crw
 			gameListBoxAnimX.to = flw + flx - crw - lbw
 			gameListBoxBackgroundAnimX.from = flw + flx - crw
 			gameListBoxBackgroundAnimX.to = flw + flx - crw - lbw
+			}
 			categoryAnimX.from = categoryX + category.msg_width * 0.5 + categoryLeft.msg_width * 0.5 + categoryGap
 			categoryAnimX.to = categoryX
 			categoryRightAnimA.from = 0
@@ -1936,10 +1942,12 @@ function on_transition( ttype, var, ttime ) {
 		}
 		
 		if ( var > 0 ) {
+			if ( my_config["enable_list_type"] == "List Box" ){
 			gameListBoxAnimX.from = flw + flx - crw
 			gameListBoxAnimX.to = flw + flx - crw - lbw
 			gameListBoxBackgroundAnimX.from = flw + flx - crw
 			gameListBoxBackgroundAnimX.to = flw + flx - crw - lbw
+			}
 			categoryAnimX.from = categoryX + category.msg_width * 0.5 + categoryLeft.msg_width * 0.5 + categoryGap
 			categoryAnimX.to = categoryX
 			categoryRightAnimA.from = 0
@@ -1999,7 +2007,7 @@ mbg = fe.add_image( "backgrounds/Logos/Mid Blue.png", 0, 0, fe.layout.width, fe.
 msystem = fe.add_image( "../../menu-art/flyer/[DisplayName]", flw*0.3, flh*0.5, flw*0.4, flh*0.4 ),
 mwhiteline = fe.add_image( "white.png", 0, flh*0.3, fe.layout.width, flh*0.15 ),
 mfliter = fe.add_text( "Main Menu", 0, flh*0.3, fe.layout.width, flh*0.1 ),
-mfliter2 = fe.add_text( "Default Layout", 0, flh*0.4, fe.layout.width, mfliter2H ),
+mfliter2 = fe.add_text( "Default View", 0, flh*0.4, fe.layout.width, mfliter2H ),
 }
 OBJECTS.mbg.alpha = 200;
 OBJECTS.mbg.preserve_aspect_ratio = true;

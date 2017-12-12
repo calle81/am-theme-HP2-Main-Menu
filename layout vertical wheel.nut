@@ -1935,7 +1935,7 @@ function year_formatted()
 
 local gameYearW = flw - crw - bbm - floor( bbh * 2.875 )
 local gameYearH = floor( bbh * 0.15 )
-local gameYear = fe.add_text( "[Emulator]  [!year_formatted]", flx + bbm, flh - bbm - gameYearH, gameYearW, gameYearH )
+local gameYear = fe.add_text( "Project HyperPie 2017", flx + bbm, flh - bbm - gameYearH, gameYearW, gameYearH )
 gameYear.align = Align.Left
 gameYear.style = Style.Regular
 gameYear.nomargin = true
@@ -1990,91 +1990,8 @@ if ( my_config["fadeWheelTitle"] == "Yes" ){
 	}
 }
 }
-if (( my_config["enable_list_vertical"] == "Vertical Wheel"  ) || ( my_config["enable_list_vertical"] == "List Box")){
-
-///////////
-//System Image
-//////////
-if ( my_config["enable_leftart"] == "Yes" ){
-if ( my_config["enable_systemimage"] == "Yes" ){	
-local systemimage = fe.add_image(( "systemimages/[DisplayName]"), flw*0.01, flh*0.45, flw*0.22, flh*0.3);
-systemimage.alpha=255;
-systemimage.preserve_aspect_ratio = true;	
-}
-}
-///////////
-//Character Image
-//////////
-/**
-if ( my_config["enable_characterimage"] == "Yes" ){
-	
-local characterimage = fe.add_image(( "characters/[DisplayName]"), flw*0.6, flh*0.65, flw*0.15, flh*0.15);
-characterimage.alpha=255;
-characterimage.preserve_aspect_ratio = true;	
-}
-**/
-// Genre
-local genreImageH = bbh - bbm * 2
-local genreImageW = floor( genreImageH * 1.125 )
-local genreImage = fe.add_image("images/unknown.png", flx + flw - crw - genreImageW - bbm, flh - bbh + bbm, genreImageW, genreImageH )
-GenreImage(genreImage)
 
 
-// Players
-local bgPlayersW = floor(bbh * 0.9)
-local bgPlayersH = floor(bbh * 0.15)
-bgPlayersH = bgPlayersH < 12 ? 12 : bgPlayersH
-local playersText = fe.add_text( "[Players]  Player(s)", flx + flw - crw - genreImageW - bgPlayersW - ceil(bbm * 1.5), flh - bgPlayersH - bbm, bgPlayersW, bgPlayersH )
-playersText.set_rgb( 255, 255, 255 )
-playersText.set_bg_rgb( 0, 0, 0 )
-playersText.align = Align.Centre
-playersText.charsize = floor( playersText.height * 1000/700 * 0.6 )
-playersText.font = "BebasNeueBold.otf"
-
-
-// // Play Count
-local bgPlayCountW = floor(bbh * 0.9)
-local bgPlayCountH = floor(bbh * 0.15)
-bgPlayCountH = bgPlayCountH < 12 ? 12 : bgPlayCountH
-local playCountText = fe.add_text( "Played:  [PlayedCount]", flx + flw - crw - genreImageW - bgPlayersW - bgPlayCountW - ceil(bbm * 1.5), flh - bgPlayCountH - bbm, bgPlayCountW, bgPlayCountH )
-playCountText.set_rgb( 255, 255, 255 )
-playCountText.set_bg_rgb( gslRGB[0], gslRGB[1], gslRGB[2] )
-playCountText.align = Align.Centre
-playCountText.charsize = floor(playCountText.height * 1000/700 * 0.6)
-playCountText.font = "BebasNeueBold.otf"
-}
-
-if (( my_config["enable_list_vertical"] == "Horizontal"  ) || ( my_config["enable_list_vertical"] == "Horizontal Animated") || ( my_config["enable_list_vertical"] == "Horizontal Boxart")){
-// Genre
-local genreImageH = bbh - bbm * 2
-local genreImageW = floor( genreImageH * 1.125 )
-local genreImage = fe.add_image("images/unknown.png", flx + flw - crw - genreImageW - bbm, (flh - bbh + bbm)*0.85, genreImageW, genreImageH )
-GenreImage(genreImage)
-
-
-// Players
-local bgPlayersW = floor(bbh * 0.9)
-local bgPlayersH = floor(bbh * 0.15)
-bgPlayersH = bgPlayersH < 12 ? 12 : bgPlayersH
-local playersText = fe.add_text( "[Players]  Player(s)", flx + flw - crw - genreImageW - bgPlayersW - ceil(bbm * 1.5), (flh - bgPlayersH - bbm)*0.85, bgPlayersW, bgPlayersH )
-playersText.set_rgb( 255, 255, 255 )
-playersText.set_bg_rgb( 0, 0, 0 )
-playersText.align = Align.Centre
-playersText.charsize = floor( playersText.height * 1000/700 * 0.6 )
-playersText.font = "BebasNeueBold.otf"
-
-
-// // Play Count
-local bgPlayCountW = floor(bbh * 0.9)
-local bgPlayCountH = floor(bbh * 0.15)
-bgPlayCountH = bgPlayCountH < 12 ? 12 : bgPlayCountH
-local playCountText = fe.add_text( "Played:  [PlayedCount]", flx + flw - crw - genreImageW - bgPlayersW - bgPlayCountW - ceil(bbm * 1.5), (flh - bgPlayCountH - bbm)*0.85, bgPlayCountW, bgPlayCountH )
-playCountText.set_rgb( 255, 255, 255 )
-playCountText.set_bg_rgb( gslRGB[0], gslRGB[1], gslRGB[2] )
-playCountText.align = Align.Centre
-playCountText.charsize = floor(playCountText.height * 1000/700 * 0.6)
-playCountText.font = "BebasNeueBold.otf"
-}
 
 // Wheel Image
 local wheelScale = ( flw - crw * 2 ) < flh ? flw - crw * 2 : flh

@@ -650,6 +650,7 @@ class Grid extends Conveyor
 	//Setup Art
         snap_t = fe.add_artwork("snap", 700, 55, 300, 300);
 	snap_t.trigger = Transition.EndNavigation;
+//	snap_t.preserve_aspect_ratio = true;
 
     frame = fe.add_image("frame2.png", width * 2, height * 2, width - 6, height - 17);
 	frame.set_rgb (gslRGB[0],gslRGB[1],gslRGB[2])
