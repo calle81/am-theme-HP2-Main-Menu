@@ -21,6 +21,7 @@ class UserConfig {
    	</ label="Clock", help="Enable Clock", options="Yes,No", order=8 /> enable_clockCinematix="No";
 	</ label="Left Wheel Image", help="Fade Out Left Wheel Image", options="Yes, Fade Out,No", order=8 /> LeftWheelCinematix="Fade Out" ;
 	</ label="Art Load Delay", help="Delay Loading of snaps and flyer to optimize performance", options="On,Off", order=8 /> art_delay="" ;	
+	</ label="View Name Popup", help="Disable or enable view name popup", options="On,Off", order=8 /> ViewNamePopup="";
 	</ label=" ", help="Brought to you by Project HyperPie", order=9 /> uct4=" ";
 	
 	</ label="WHEEL OPTIONS", help="Brought to you by Project HyperPie", order=10 /> uct5=" ";  
@@ -1213,10 +1214,10 @@ gameListBox.y += floor( ( gameListBox.height - ( floor( gameListBox.height / gam
 
 
 // Game Listbox Animations
-local gameListBoxAnimX = Animate( gameListBox, "x", 4, glist_delay, 0.88 )
-local gameListBoxAnimA = Animate( gameListBox, "listbox_alpha", 1, glist_delay, 0.88 )
-local gameListBoxBackgroundAnimX = Animate( gameListBoxBackground, "x", 4, glist_delay, 0.88 )
-local gameListBoxBackgroundAnimA = Animate( gameListBoxBackground, "bg_alpha", 1, glist_delay, 0.88 )
+local gameListBoxAnimX = Animate( gameListBox, "x", 4, glist_delay, 0.4 )
+local gameListBoxAnimA = Animate( gameListBox, "listbox_alpha", 1, glist_delay, 0.4 )
+local gameListBoxBackgroundAnimX = Animate( gameListBoxBackground, "x", 4, glist_delay, 0.4 )
+local gameListBoxBackgroundAnimA = Animate( gameListBoxBackground, "bg_alpha", 1, glist_delay, 0.4 )
 if ( glist_delay == 0 ) {
 	gameListBoxAnimX.to = flw + flx - crw - lbw
 	gameListBoxBackgroundAnimX.to = flw + flx - crw - lbw
@@ -1566,7 +1567,7 @@ function fade_transitions( ttype, var, ttime ) {
 fe.add_transition_callback( "fade_transitions" );
 
 //View name
-
+if ( my_config["ViewNamePopup"] == "On" ){
 local mfliter2W = (flw - crw - bbm - floor( bbh * 2.875 ))
 local mfliter2H = floor( bbh * 0.15 )
 
@@ -1624,3 +1625,4 @@ animation.add( PropertyAnimation( OBJECTS.mfliter, movein_msysfliter ) );
 animation.add( PropertyAnimation( OBJECTS.mfliter, moveout_msysfliter ) );
 animation.add( PropertyAnimation( OBJECTS.mfliter2, movein_msysfliter ) );
 animation.add( PropertyAnimation( OBJECTS.mfliter2, moveout_msysfliter ) );
+}

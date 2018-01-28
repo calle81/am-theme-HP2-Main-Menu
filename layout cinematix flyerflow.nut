@@ -21,6 +21,7 @@ class UserConfig {
    	</ label="Clock", help="Enable Clock", options="Yes,No", order=8 /> enable_clockCinematix="No";
 	</ label="Left Wheel Image", help="Fade Out Left Wheel Image", options="Yes, Fade Out,No", order=8 /> LeftWheelCinematix="Fade Out" ;
 	</ label="Art Load Delay", help="Delay Loading of snaps and flyer to optimize performance", options="On,Off", order=8 /> art_delay="" ;	
+	</ label="View Name Popup", help="Disable or enable view name popup", options="On,Off", order=8 /> ViewNamePopup="";	
 	</ label=" ", help="Brought to you by Project HyperPie", order=9 /> uct4=" ";
 	
 	</ label="WHEEL OPTIONS", help="Brought to you by Project HyperPie", order=10 /> uct5=" ";  
@@ -1111,7 +1112,7 @@ fe.load_module("conveyor_helper");
 cList.show();
  
 
-
+if ( my_config["ViewNamePopup"] == "On" ){
 //View name
 
 local mfliter2W = (flw - crw - bbm - floor( bbh * 2.875 ))
@@ -1171,3 +1172,4 @@ animation.add( PropertyAnimation( OBJECTS.mfliter, movein_msysfliter ) );
 animation.add( PropertyAnimation( OBJECTS.mfliter, moveout_msysfliter ) );
 animation.add( PropertyAnimation( OBJECTS.mfliter2, movein_msysfliter ) );
 animation.add( PropertyAnimation( OBJECTS.mfliter2, moveout_msysfliter ) );
+}

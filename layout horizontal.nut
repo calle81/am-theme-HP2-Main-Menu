@@ -26,6 +26,7 @@ class UserConfig {
    	</ label="Clock", help="Enable Clock", options="Yes,No", order=15 /> enable_clock="";
 	</ label="Enable System Image", help="Enable System Image Art", options="Yes,No", order=16 /> enable_systemimage="";
 	</ label="Art Load Delay", help="Delay Loading of snaps and flyer to optimize performance", options="On,Off", order=8 /> art_delay="" ;		
+	</ label="View Name Popup", help="Disable or enable view name popup", options="On,Off", order=8 /> ViewNamePopup="";
 	</ label=" ", help="Brought to you by Project HyperPie", order=17 /> uct4=" ";
 
 
@@ -883,59 +884,47 @@ local fly = fe.layout.height;
 /////////////////
 //Game Description
 ////////////////
-if ( my_config["select_description"] == "Right" ) {
-local gtext = fe.add_text("[Overview]", flx*0.77, fly*0.2, flw*0.20, flh*0.24 );
-gtext.set_rgb( 255, 255, 255 );
-gtext.align = Align.Left;
-gtext.charsize = 25;
-gtext.rotation = 0;
-gtext.word_wrap = true;
+
+local image_bg = fe.add_image( "white.png", flx*0.719, bth, lbw, (flh - bth - bbh) ); 
+
+image_bg.set_rgb(bgRGB[0],bgRGB[1],bgRGB[2])
+image_bg.alpha = 150;
+image_bg.visible=false;
+
+local text = fe.add_text("info", flx*0.72, fly*0.13, flw*0.26, flh*0.7);
+text.font = "AEH.ttf"
+text.charsize = flx*0.01;
+text.align = Align.Left;
+text.word_wrap = true;
+text.alpha = 255;
+text.visible=false;
+
+fe.add_transition_callback("on_infotransition")
+
+function on_infotransition(ttype, var, ttime) {
+    if ( ttype == Transition.EndNavigation)
+        text.msg = fe.game_info(Info.Overview)
+	if ( ttype == Transition.StartLayout)
+        text.msg = fe.game_info(Info.Overview)
+	if ( ttype == Transition.ToNewList)
+        text.msg = fe.game_info(Info.Overview)
 }
 
-/////////
-if ( my_config["select_description"] == "Popup" ) {
-class PopUpImage
-{
-_my_image_bg=null;
-_my_text=null;
+fe.add_signal_handler(this, "on_signalinfo");
+function on_signalinfo(signal) {
+	if ( signal == "custom2" ){
+		if ( image_bg.visible==false ) {
+			image_bg.visible=true;
+			text.visible=true;
 
-constructor()
-{
-_my_image_bg = fe.add_image( "white.png", flx*0.719, bth, lbw, (flh - bth - bbh) ); 
-_my_image_bg.set_rgb(bgRGB[0],bgRGB[1],bgRGB[2])
-_my_image_bg.visible=false;
-_my_image_bg.alpha = 180;
-
-_my_text = fe.add_text("[Overview]", flx*0.72, bth, lbw, flh - bth - bbh );
-_my_text.visible=false;
-_my_text.charsize = 22;
-//_my_text.set_rgb( 69, 69, 69 );
-_my_text.align = Align.Left;
-_my_text.word_wrap = true;
-_my_text.alpha = 255;
-//_my_text.style = Style.Bold;
-//_my_text.alpha= 100;
-
-fe.add_signal_handler( this, "on_signal" )
+		} else {
+			image_bg.visible=false;
+			text.visible=false;
+		}
+		return true;
+	}
+	return false;
 }
-
-
-function on_signal( signal )
-{
-if ( signal == "custom2" )
-{
-_my_image_bg.visible=!_my_image_bg.visible;
-_my_text.visible=_my_image_bg.visible;
-return true;
-}
-return false;
-}
-}
-local blah = PopUpImage();
-}
-
-
-if ( my_config["select_description"] == "Off" ) {}
  
 //////////////////
 ///Cart Art Animation
@@ -1882,9 +1871,9 @@ favouriteIcon.set_rgb( gslRGB[0], gslRGB[1], gslRGB[2] )
 // Game Title
 if ( my_config["enable_title"] == "Yes") {
 if (( my_config["enable_list_horizontal"] == "Horizontal"  ) || ( my_config["enable_list_horizontal"] == "Horizontal Animated") || ( my_config["enable_list_horizontal"] == "Horizontal Boxart")){
-local gameTitleW = (flw - crw - bbm - bbm)*0.5
-local gameTitleH = (floor( bbh * 0.35 ) )*0.5
-local gameTitle = fe.add_text( "[Title]", (flx + bbm), (flh - bbh + bbm)*0.02, gameTitleW, gameTitleH )
+local gameTitleW = (flw - crw - bbm - bbm)
+local gameTitleH = (floor( bbh * 0.35 ) )
+local gameTitle = fe.add_text( "[Title]", (flx + bbm)*43, (flh - bbh + bbm)*0.05, gameTitleW, gameTitleH )
 gameTitle.align = Align.Left
 gameTitle.style = Style.Regular
 gameTitle.nomargin = true
@@ -1904,9 +1893,9 @@ function year_formatted()
 	return m
 }
 
-local gameYearW = (flw - crw - bbm - floor( bbh * 2.875 ))*0.8
-local gameYearH = floor( bbh * 0.15 )*0.8
-local gameYear = fe.add_text( "Project HyperPie 2017", (flx + bbm), (flh - bbm - gameYearH)*0.055, gameYearW, gameYearH )
+local gameYearW = (flw - crw - bbm - floor( bbh * 2.875 ))
+local gameYearH = floor( bbh * 0.15 )
+local gameYear = fe.add_text( "Project HyperPie 2017", (flx + bbm)*43, (flh - bbm - gameYearH)*0.11, gameYearW, gameYearH )
 gameYear.align = Align.Left
 gameYear.style = Style.Regular
 gameYear.nomargin = true
@@ -2122,7 +2111,7 @@ local categoryRightAnimA = Animate( categoryRight, "alpha", categoryOvershot, 0,
 local categoryLeft2AnimA = Animate( categoryLeft2, "alpha", categoryOvershot, 0, categorySmoothing )
 local categoryRight2AnimA = Animate( categoryRight2, "alpha", categoryOvershot, 0, categorySmoothing )
 
-// List Entry
+/** List Entry
 local gameListEntryW = floor( bth * 2.5 )
 local gameListEntryH = floor( bth * 0.25 )
 local gameListEntryY = floor( bth / 2.0 ) - floor( gameListEntryH / 2 )
@@ -2132,7 +2121,7 @@ gameListEntry.style = Style.Regular
 gameListEntry.font = "BebasNeueLight.otf"
 gameListEntry.set_rgb(titRGB[0],titRGB[1],titRGB[2])
 gameListEntry.charsize = floor(gameListEntry.height * 1000/700)
-
+**/
 // Transitions
 fe.add_transition_callback( this, "on_transition" )
 
@@ -2219,6 +2208,7 @@ function on_transition( ttype, var, ttime ) {
 
 
 	//Display current time
+/**
 if ( my_config["enable_clock"] == "Yes" ){
   local dt = fe.add_text( "", flw*0.65, flh*0.03, flw*0.3, flh*0.095 );
 dt.align = Align.Centre
@@ -2239,7 +2229,7 @@ function update_clock( ttime ){
 }
   fe.add_ticks_callback( this, "update_clock" );
 }
-
+**/
 
 ////////////////
 //Sound effects
@@ -2263,7 +2253,7 @@ function fade_transitions( ttype, var, ttime ) {
 fe.add_transition_callback( "fade_transitions" );
 
 //View name
-
+if ( my_config["ViewNamePopup"] == "On" ){
 local mfliter2W = (flw - crw - bbm - floor( bbh * 2.875 ))
 local mfliter2H = floor( bbh * 0.15 )
 
@@ -2321,3 +2311,4 @@ animation.add( PropertyAnimation( OBJECTS.mfliter, movein_msysfliter ) );
 animation.add( PropertyAnimation( OBJECTS.mfliter, moveout_msysfliter ) );
 animation.add( PropertyAnimation( OBJECTS.mfliter2, movein_msysfliter ) );
 animation.add( PropertyAnimation( OBJECTS.mfliter2, moveout_msysfliter ) );
+}
