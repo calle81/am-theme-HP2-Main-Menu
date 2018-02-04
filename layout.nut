@@ -2062,6 +2062,7 @@ function on_transition( ttype, var, ttime ) {
 	}
 
 
+
 ////////////////
 //Sound effects
 ////////////
